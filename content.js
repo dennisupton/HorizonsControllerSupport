@@ -45,7 +45,7 @@ function showAlert(message) {
     setTimeout(() => alert.remove(), 400);
   }, 3000);
 }
-
+var justPressed = [false,false,false,false]
 function poll() {
   const gamepads = navigator.getGamepads();
   for (const gp of gamepads) {
@@ -59,6 +59,31 @@ function poll() {
         held.delete(button);
         fireKey("keyup", key);
       }
+    }
+    const axes = gp.axes;
+    if (axes[0] < -0.5 && !justPressed[0]){
+        fireKey("keydown", "ArrowLeft");
+        justPressed[0] = true
+    }else if (!(axes[0] < -0.5 )){
+        justPressed[0] = false
+    }
+    if (axes[0] > 0.5 && !justPressed[1]){
+        fireKey("keydown", "ArrowRight");
+        justPressed[1] = true
+    }else if (!(axes[0] > 0.5 )){
+        justPressed[1] = false
+    }
+    if (axes[1] > 0.5 && !justPressed[2]){
+        fireKey("keydown", "ArrowDown");
+        justPressed[2] = true
+    }else if (!(axes[1] > 0.5 )){
+        justPressed[2] = false
+    }
+    if (axes[1] < -0.5 && !justPressed[3]){
+        fireKey("keydown", "ArrowUp");
+        justPressed[3] = true
+    }else if (!(axes[1] < -0.5 )){
+        justPressed[3] = false
     }
   }
   requestAnimationFrame(poll);
