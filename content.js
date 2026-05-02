@@ -28,6 +28,38 @@ function showAlert(message) {
     right: "16px",
     zIndex: "999999",
     background: "#1a1a2e",
+    color: "#fff",
+    padding: "10px 16px",
+    borderRadius: "8px",
+    fontFamily: "sans-serif",
+    fontSize: "14px",
+    boxShadow: "0 4px 12px rgba(0,0,0,0.3)",
+    transition: "opacity 0.4s ease",
+    opacity: "1",
+  });
+
+  document.body.appendChild(alert);
+
+  setTimeout(() => {
+    alert.style.opacity = "0";
+    setTimeout(() => alert.remove(), 400);
+  }, 3000);
+}
+
+function poll() {
+  const gamepads = navigator.getGamepads();
+  for (const gp of gamepads) {
+    if (!gp) continue;
+    for (const { button, key } of BUTTON_MAP) {
+      const pressed = gp.buttons[button]?.pressed;
+      if (pressed && !held.has(button)) {
+        held.add(button);
+        fireKey("keydown", key);
+      } else if (!pressed && held.has(button)) {
+        held.delete(button);
+        fireKey("keyup", key);
+      }
+    }
   }
   requestAnimationFrame(poll);
 }
