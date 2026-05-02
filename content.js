@@ -65,6 +65,6 @@ function poll() {
 }
 
 window.addEventListener("gamepadconnected", () => {
-  console.log("Controller connected, starting poll");
+  showAlert(`Controller connected`);
   poll();
 });
