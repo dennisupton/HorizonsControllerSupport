@@ -1,7 +1,7 @@
 const BUTTON_MAP = [
   { button: 0, key: "Enter" },        // A/Cross
-  { button: 1, key: "x" },        // B/Circle
-  { button: 12, key: "ArrowUp" }, // D-pad up
+  { button: 1, key: "Escape" },        // B/Circle
+  { button: 12, key: "ArrowUp" }, //D PAD
   { button: 13, key: "ArrowDown" },
   { button: 14, key: "ArrowLeft" },
   { button: 15, key: "ArrowRight" },
@@ -29,7 +29,7 @@ function showAlert(message) {
     zIndex: "999999",
     background: "#1a1a2e",
     color: "#fff",
-    padding: "10px 16px",
+    padding: "10px 16px", //this css is ai cause i cba to write css
     borderRadius: "8px",
     fontFamily: "sans-serif",
     fontSize: "14px",
@@ -64,7 +64,6 @@ function poll() {
   requestAnimationFrame(poll);
 }
 
-// Gamepad API needs a connection event first
 window.addEventListener("gamepadconnected", () => {
   console.log("Controller connected, starting poll");
   poll();
